@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 
 
-app.get('/api/users/:licenseNo', async(req, res) => {
+app.get('/getlicensedetail/:licenseNo', async(req, res) => {
     const LicenseNo = req.params.licenseNo;
     if(LicenseNo.length==16){
 
