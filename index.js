@@ -1,9 +1,12 @@
 const express = require('express');
+const cors = require('cors');
 const { getLicenceDetail } = require('./controller');
+const { getCompanyDetail } = require('./controller/company');
 
 const app = express();
-const port = 3000;
+const port = 3500;
 
+app.use(cors());
 
 app.get('/getlicensedetail/:licenseNo', async(req, res) => {
     const LicenseNo = req.params.licenseNo;
@@ -18,6 +21,22 @@ app.get('/getlicensedetail/:licenseNo', async(req, res) => {
         }
     }else{
         res.status(400).json({message:"License number is not valid"})
+    }
+});
+
+app.get('/getcompanydetail/:companyname', async(req, res) => {
+    const companyname = req.params.companyname;
+    if(companyname.length>1){
+
+        const data = await getCompanyDetail(companyname)
+        if(data?.length>0){
+            res.status(200).json({data});
+        }else{
+            res.status(404).json({message:"company name is not found "});
+            
+        }
+    }else{
+        res.status(400).json({message:"company name is not valid"})
     }
 });
   
