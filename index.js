@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { getLicenceDetail } = require('./controller');
 const { getCompanyDetail } = require('./controller/company');
+const { getSIAApprovedAgencyDetail } = require('./controller/siaApproved');
 
 const app = express();
 const port = 3500;
@@ -39,6 +40,20 @@ app.get('/getcompanydetail/:companyname', async(req, res) => {
         res.status(400).json({message:"company name is not valid"})
     }
 });
+
+app.get('/getSIAApprovedAgencyDetail', async(req, res) => {
+
+        const data = await getSIAApprovedAgencyDetail();
+        // if(data?.length>0){
+            res.status(200).json({data});
+        // }else{
+        //     res.status(404).json({message:"company name is not found "});
+            
+        // }
+
+});
+
+// getSIAApprovedAgencyDetail
   
 
 app.listen(port, () => {
