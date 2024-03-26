@@ -20,7 +20,7 @@ async function getSIAApprovedAgencyDetail() {
             tableData.push(rowData);
         });
 
-        return tableData?.slice(1);
+        return tableData?.slice(1).map((data)=>({contractor: data[0], sector: data[1], expiry: data[2]}));
 
       } catch (error) {
         // Handle any errors
